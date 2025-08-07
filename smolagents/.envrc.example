@@ -1,0 +1,7 @@
+source .venv/bin/activate
+
+# Mistral API configuration
+export MISTRAL_API_KEY="KEY"
+
+# - But direnv blacklists PS1 from being exported due to legacy Bash bugs, so it blocks that change and shows the warning.
+unset PS1
