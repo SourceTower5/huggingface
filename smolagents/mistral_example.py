@@ -1,4 +1,9 @@
-from smolagents import CodeAgent, InferenceClientModel, DuckDuckGoSearchTool
+from smolagents import (
+    CodeAgent,
+    InferenceClientModel,
+    DuckDuckGoSearchTool,
+    VisitWebpageTool,
+)
 from smolagents import LiteLLMModel
 from smolagents import TransformersModel
 
@@ -21,17 +26,20 @@ mistral_model = LiteLLMModel(model_id=small_model)
 
 model = mistral_model
 
+# visit webpage is needed for the agent to see the contents
+# search tools just returns links
 duck_tool = DuckDuckGoSearchTool()
+visit_webpage_tool = VisitWebpageTool()
 
 agent = CodeAgent(
-    tools=[duck_tool],
-    model = model,
+    tools=[duck_tool, visit_webpage_tool],
+    model=model,
 )
 
 # sum_command = "Calculate the sum of numbers from 1 to 10"
 # result = agent.run(sum_command)
 # print(result)
 
-weather_command = "France weather"
+weather_command = "Tokyo weather"
 result = agent.run(weather_command)
 print(result)
